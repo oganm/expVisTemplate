@@ -20,8 +20,14 @@ shinyServer(function(input, output, session) {
     
     # this is the data.frame that will be plotted when a gene is entered
     # in this case you could have placed the code for makeFrame function here
-    # but it can get bloated in the long run\
+    # but it can get bloated in the long run
     # a change in vals$gene will trigger this so frame will be updated
+    # Technical Info ###
+    # reactive() works similarly to observe() but it assigns a return value to a variable
+    # and unlike observe it will only be excecuted if that return variable is 
+    # used by another code block. frame object is called by ggvis and ggplot plots
+    # below so this code will always be excecuted. if you make plotting conditional,
+    # for instance depend on a button, the code will be only excecuted when the button is pressed
     frame = reactive({
         makeFrame(vals$gene)
     })
